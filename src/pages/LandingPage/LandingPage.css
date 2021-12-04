@@ -1,0 +1,19 @@
+.landing_main_section {
+  background: rgb(31, 31, 31);
+}
+.background_image {
+  background-image: url("../../images/BD-en-20211129-popsignuptwoweeks-perspective_alpha_website_small.jpg");
+  height: 95vh;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+.landing_main_overlay {
+  background: linear-gradient(
+    360deg,
+    rgba(0, 0, 0, 0.7875525210084033) 0%,
+    rgba(0, 0, 0, 0.3253676470588235) 47%,
+    rgba(0, 0, 0, 0.7931547619047619) 100%
+  );
+  height: 100%;
+}

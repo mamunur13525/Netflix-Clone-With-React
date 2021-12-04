@@ -1,0 +1,17 @@
+.footer_section{
+    padding: 70px 45px;
+    margin: auto;
+    width: 70%;
+    color:gray
+}
+.footer_ul{ 
+    list-style: none;
+    margin:0px;
+    padding-left: 0px;
+    margin-top: 1rem;
+}
+.footer_ul li{
+    margin-bottom: 1rem;
+    font-weight: 400;
+    font-size: .9rem;
+}
