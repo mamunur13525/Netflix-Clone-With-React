@@ -3,8 +3,8 @@ import './LoginSingup.css';
 import { useForm } from "react-hook-form";
 import { useNavigate } from 'react-router';
 
-const SingupForm = ({  }) => {
-    const { register, handleSubmit, watch, formState: { errors } } = useForm();
+const SingupForm = () => {
+    const { register, handleSubmit, formState: { errors } } = useForm();
     const navigate = useNavigate();
     const onSubmit = data => console.log(data);
     const clickToSignIn = () => {

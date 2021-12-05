@@ -83,3 +83,21 @@ nav {
 .sign_up_button{
   margin-left: 1rem;
 }
+.logo-div div ul li.active a {
+  color: rgb(179, 179, 179);
+}
+.favoriteNav{
+  position: relative;
+}
+.red_badge.favorite{
+  position: absolute;
+  background-color: red;
+  border-radius: 50%;
+  width: 1rem;
+  height: 1rem;
+  font-size: 0.8rem;
+  font-weight: bold;
+  text-align: center;
+  top:-.3em;
+  right: -1rem;
+}

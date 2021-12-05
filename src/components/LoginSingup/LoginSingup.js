@@ -6,7 +6,6 @@ import './LoginSingup.css';
 const LoginSingup = ({ state,isLoginTrue }) => {
     const [logInBox, setLogInBox] = useState(isLoginTrue);
     useEffect(()=>{
-        console.log({isLoginTrue})
         setLogInBox(isLoginTrue)
     },[isLoginTrue])
     return (

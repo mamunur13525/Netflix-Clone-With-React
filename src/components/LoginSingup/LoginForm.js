@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from 'react-router';
 
 const LoginForm = () => {
-    const { register, handleSubmit, watch, formState: { errors } } = useForm();
+    const { register, handleSubmit, formState: { errors } } = useForm();
     const navigate = useNavigate();
     const [learnMore, setLearnMore] = useState(false);
     const onSubmit = data => console.log(data);
@@ -43,7 +43,7 @@ const LoginForm = () => {
                 This page is protected by Google reCAPTCHA to ensure your'e not a bot.
                 {
                     !learnMore &&
-                    <span onClick={()=>setLearnMore(true)} className='hovertoCursor text-primary'>Learn more.</span>
+                    <span onClick={() => setLearnMore(true)} className='hovertoCursor text-primary'>Learn more.</span>
                 }
             </p>
             {
