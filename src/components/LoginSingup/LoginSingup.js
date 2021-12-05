@@ -1,16 +1,23 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import LoginForm from './LoginForm';
 import SingupForm from './SingupForm';
 import './LoginSingup.css';
-import Footer from '../Footer/Footer';
 
-const LoginSingup = () => {
+const LoginSingup = ({ state,isLoginTrue }) => {
+    const [logInBox, setLogInBox] = useState(isLoginTrue);
+    useEffect(()=>{
+        console.log({isLoginTrue})
+        setLogInBox(isLoginTrue)
+    },[isLoginTrue])
     return (
 
         <div>
-            <LoginForm/>
-            {/* <SingupForm/> */}
-           
+            {
+                logInBox ?
+                    <LoginForm  state={state} />
+                    :
+                    <SingupForm  state={state} />
+            }
         </div>
     );
 };

@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
-import { useLocation, useNavigate, navigate } from 'react-router';
+import { useLocation } from 'react-router';
 import Footer from '../../components/Footer/Footer';
 import LoginSingup from '../../components/LoginSingup/LoginSingup';
 import Navbar from '../../components/Navbar/Navbar';
 import './Login.css';
 
-const Login = () => {
+const Login = ({isLoginTrue}) => {
     const [login, setlogin] = useState(true)
-    const navigate = useNavigate();
+ 
     const { state } = useLocation();
 
 
@@ -16,7 +16,7 @@ const Login = () => {
             <div className="landing_main_overlay">
                 <Navbar signBtn={false}/>
                 <div className='login_box'>
-                    <LoginSingup />
+                    <LoginSingup isLoginTrue={isLoginTrue} state={state}/>
                 </div>
                 <Footer />
             </div>
