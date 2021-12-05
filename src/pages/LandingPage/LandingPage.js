@@ -42,7 +42,7 @@ const LandingPage = () => {
         <section className='landing_main_section '>
             <div className='background_image'>
                 <div className="landing_main_overlay">
-                    <Navbar />
+                    <Navbar signBtn={true}/>
                     <LandingMainContent />
                 </div>
             </div>
