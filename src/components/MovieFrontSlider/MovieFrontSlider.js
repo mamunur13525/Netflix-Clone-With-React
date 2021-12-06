@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import './MovieFrontSlider.css';
 import Slider from "react-slick";
-import { AiOutlinePlus, IoCheckmarkDoneOutline,BsInfoCircle } from 'react-icons/all';
+import { AiOutlinePlus, FiCheck, BsInfoCircle } from 'react-icons/all';
+import { FavoriteList } from '../../App';
 
 const settings = {
     infinite: true,
@@ -12,9 +13,10 @@ const settings = {
 
 const MovieFrontSlider = () => {
     const [popularMovie, setPopularMovie] = useState([])
+    const [favorite, setFavorite] = useContext(FavoriteList)
     const [favoriteAdd, setFavoriteAdd] = useState(false)
     useEffect(() => {
-        fetch('https://api.themoviedb.org/3/movie/popular?api_key=1a12ab4d115a6496ed52f90f1149fbd4&language=en-US&page=3')
+        fetch('https://api.themoviedb.org/3/movie/upcoming?api_key=1a12ab4d115a6496ed52f90f1149fbd4&language=en-US&page=1')
             .then(res => res.json())
             .then(data => {
                 if (!data.hasOwnProperty('success'))
@@ -22,7 +24,17 @@ const MovieFrontSlider = () => {
             })
             .catch(err => console.log({ err }))
     }, [])
-   
+
+
+    const favoriteCLick = (movie) => {
+        setFavoriteAdd(prev => !prev)
+        const findMovie = favorite.find(item => item.id === movie.id) !== undefined;
+        if (findMovie) {
+            setFavorite(favorite.filter(item => item.id !== movie.id))
+        } else {
+            setFavorite([...favorite, movie])
+        }
+    }
     return (
         <Slider {...settings}>
             {
@@ -43,25 +55,25 @@ const MovieFrontSlider = () => {
                                 <p className='description releaseDate'>
                                     Release Date: {movie.release_date}
                                 </p>
-                               <div className='d-flex'>
-                               <button onClick={() => setFavoriteAdd(prev => !prev)} className='favorite_btn '>
-                                    <span>
-                                        {
-                                            favoriteAdd ?
-                                                <>
-                                                    <IoCheckmarkDoneOutline />  Already Added
-                                                </>
-                                                :
-                                                <>
-                                                    <AiOutlinePlus />  Add To Favorite'
-                                                </>
-                                        }
-                                    </span>
-                                </button>
-                                <button className='favorite_btn ml-2'>
-                               <BsInfoCircle/>   More Info
-                                </button>
-                               </div>
+                                <div className='d-flex'>
+                                    <button onClick={() => favoriteCLick(movie)} className='favorite_btn '>
+                                        <span>
+                                            {
+                                                favoriteAdd ?
+                                                    <>
+                                                        <FiCheck />  Already Added
+                                                    </>
+                                                    :
+                                                    <>
+                                                        <AiOutlinePlus />  Add To Favorite'
+                                                    </>
+                                            }
+                                        </span>
+                                    </button>
+                                    <button className='favorite_btn ml-2'>
+                                        <BsInfoCircle />   More Info
+                                    </button>
+                                </div>
                             </div>
                         </div>
                         <div>

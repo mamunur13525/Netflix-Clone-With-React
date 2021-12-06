@@ -1,0 +1,7 @@
+.landing_main_section{
+    min-height: 100vh;
+}
+.div_movie_list.favorite{
+    justify-content: flex-start;
+    margin-left: 1rem;
+}

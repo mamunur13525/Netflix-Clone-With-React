@@ -5,8 +5,9 @@
   position: relative;
   box-shadow: 0 0 50px black;
 }
-.slide_img {
-  width: 73%;
+img.slide_img {
+  height: 87vh;
+  width: auto;
   margin-left: auto;
 }
 .title_box {
@@ -42,7 +43,7 @@
   font-size: 35px;
 }
 .slick-slide {
-  height: 78vh;
+  height: 87vh;
 }
 .slick-slider.slick-initialized {
   box-shadow: 0px 10px 24px black;

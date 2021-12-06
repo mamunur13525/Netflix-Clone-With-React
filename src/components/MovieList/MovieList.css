@@ -1,37 +1,88 @@
-.list_movie_img{
-    width: 16%;
-    margin-bottom: 1rem;
-    cursor: pointer;
-    transition: transform ease-in .2s;
+.movie_list_div {
+  width: 16%;
+  margin-bottom: 1rem;
+  cursor: pointer;
+  transition: all ease-in 0.2s;
+  position: relative;
 }
-.div_movie_list{
-    flex-wrap: wrap;
-    justify-content: space-between;
+.list_movie_img {
+  color: white;
+  overflow: none;
 }
-.list_movie_img:hover{
-    transform: scale(1.1);
+.div_movie_list {
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-left: 1rem;
+  margin-right: 1rem;
 }
-.movie_list_filter{
-    display: flex;
-    margin-top: 2rem;
-    margin-bottom: 2rem;
+.movie_list_div:hover {
+  transform: scale(1.1);
+  z-index: 14;
 }
-.movie_list_filter li{
-    cursor: pointer;
-    color: white;
-    list-style:none;
-    margin-right: .7rem;
-    background-color: rgb(43, 43, 43);
-    padding: .5rem 1rem;
-    border-radius: 5px;
+.movie_list_div:hover .movie_title_des {
+  opacity: 1;
 }
-.category_search{
-    color: white;
-    font-size: 2rem;
-    font-weight: 600;
-    margin-top: 3rem;
-    margin-left: 2rem;
+.movie_title_des {
+  color: white;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  background-color: rgba(14, 14, 14, 0.377);
+  padding: 1rem 0.5rem 0.3rem;
+  transition: all 0.6s;
+  opacity: 0;
+  overflow: hidden;
+}
+.movie_title_des h5 {
+  font-weight: 800;
+  filter: drop-shadow(0 0 .3rem rgb(0, 0, 0));
+}
+.movie_title_des p {
+  line-height: 1.1;
+  height: 2.5rem;
+  font-size: 0.8rem;
+  overflow: hidden;
+  filter: drop-shadow(0 0 .3rem rgb(0, 0, 0));
+
+}
+
+.movie_list.favorite_btn {
+  font-size: 0.9rem;
+  background: none;
+  font-weight: 800;
+  padding: 0;
+  margin-bottom: 0.4rem;
+  filter: drop-shadow(0 0 .3rem rgb(0, 0, 0));
+
+}
+.movie_list.favorite_btn .icon {
+  font-size: 1.6rem;
+  padding: 0.2rem;
+  border: 1px solid white;
+  border-radius: 50%;
+}
+.movie_list_filter {
+  display: flex;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+.movie_list_filter li {
+  cursor: pointer;
+  color: white;
+  list-style: none;
+  margin-right: 0.7rem;
+  background-color: rgb(43, 43, 43);
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  padding-bottom: 0.3rem;
+}
+.category_search {
+  color: white;
+  font-size: 2rem;
+  font-weight: 600;
+  margin-top: 3rem;
+  margin-left: 2rem;
 }
 .movie_list_filter li.activeCategory {
-    background: #b20000 !important;
+  background: #b20000 !important;
 }
