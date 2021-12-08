@@ -18,8 +18,7 @@ const searchData = [
 ]
 
 
-const SearchDropDown = () => {
-    const [searchType, setSearchType] = useState('');
+const SearchDropDown = ({searchType, dropDown, setSearchType}) => {
     const [search, setSearch] = useState('All')
     const ref = useRef();
     useEffect(() => {
@@ -44,36 +43,39 @@ const SearchDropDown = () => {
                         <IoMdClose style={{ cursor: 'pointer' }} onClick={() => setSearchType('')} />
                 }
             </div>
-            <div className={`search_result ${searchType ? 'show' : "hide"} `}>
-                <ul>
-                    <li className='search_type'>
-                        <span onClick={() => setSearch('All')} className={search === 'All' ? 'active' : ''} >All</span>
-                        <span onClick={() => setSearch('Movies')} className={search === 'Movies' ? 'active' : ''}>Movies</span>
-                        <span onClick={() => setSearch('Tv/Shows')} className={search === 'Tv/Shows' ? 'active' : ''}>Tv/Shows</span>
-                    </li>
-                    {
-                        searchData.map((item, index) => (
-                            <li className='movie_search_list' key={index}>
-                                <span>
-                                    <img src={item.img} alt="" />
-                                </span>
-                                <div>
-                                    <p className='search_title'>
-                                        {item.name}
-                                    </p>
-                                    <p className='search_year'>
-                                        {item.year}
-                                    </p>
-                                    <p className='search_des'>
-                                        {item.des}
-                                    </p>
-                                </div>
-                            </li>
-                        ))
-                    }
-                    <li className='more_results'>More results</li>
-                </ul>
-            </div>
+           {
+               dropDown &&
+               <div className={`search_result ${searchType ? 'show' : "hide"} `}>
+               <ul>
+                   <li className='search_type'>
+                       <span onClick={() => setSearch('All')} className={search === 'All' ? 'active' : ''} >All</span>
+                       <span onClick={() => setSearch('Movies')} className={search === 'Movies' ? 'active' : ''}>Movies</span>
+                       <span onClick={() => setSearch('Tv/Shows')} className={search === 'Tv/Shows' ? 'active' : ''}>Tv/Shows</span>
+                   </li>
+                   {
+                       searchData.map((item, index) => (
+                           <li className='movie_search_list' key={index}>
+                               <span>
+                                   <img src={item.img} alt="" />
+                               </span>
+                               <div>
+                                   <p className='search_title'>
+                                       {item.name}
+                                   </p>
+                                   <p className='search_year'>
+                                       {item.year}
+                                   </p>
+                                   <p className='search_des'>
+                                       {item.des}
+                                   </p>
+                               </div>
+                           </li>
+                       ))
+                   }
+                   <li className='more_results'>More results</li>
+               </ul>
+           </div>
+           }
         </div>
     );
 };

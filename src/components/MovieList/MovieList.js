@@ -2,48 +2,73 @@ import React, { useContext, useEffect, useState } from 'react';
 import './MovieList.css';
 import Movie from './Movie';
 import { MovileList } from '../../App';
+import SearchDropDown from '../SearchableDropdown/SearchDropDown';
 
 const CategoryBtn = [
     {
         name: 'All',
-        id: 1
+        id: 1,
+
     }, {
         name: 'Popular',
-        id: 2
+        id: 2,
+        fetchLink: 'https://api.themoviedb.org/3/movie/popular?api_key=1a12ab4d115a6496ed52f90f1149fbd4&language=en-US&page=1'
     }, {
         name: 'Top Rated',
-        id: 3
+        id: 3,
+        fetchLink: 'https://api.themoviedb.org/3/movie/top_rated?api_key=1a12ab4d115a6496ed52f90f1149fbd4&language=en-US&page=1'
     }, {
-        name: 'Highest Grossing',
-        id: 4
-    }, {
-        name: 'New Releases',
-        id: 5
-    }, {
-        name: 'Most Liked',
-        id: 6
-    }, {
-        name: 'Trending Now',
-        id: 7
-    },
+        name: 'Upcoming',
+        id: 4,
+        fetchLink: 'https://api.themoviedb.org/3/movie/upcoming?api_key=1a12ab4d115a6496ed52f90f1149fbd4&language=en-US&page=1'
+    }
 ]
 
 const MovieList = () => {
-    const [allMovie, setAllMovie] = useContext(MovileList)
-    const [categorySearch, setCategorySearch] = useState('All')
+    const [allMovie] = useContext(MovileList);
+    const [categorySearch, setCategorySearch] = useState('All');
+    const [loadData, setLoadData] = useState([])
+    const [searchType,setSearchType] = useState('')
+
+    useEffect(() => {
+        if (allMovie.length) {
+            setLoadData(allMovie.reverse())
+        }
+    }, [allMovie])
+    const categoryBtnClick = (item) => {
+        setCategorySearch(item.name)
+        if (item.name === 'All') {
+            setLoadData(allMovie)
+        } else {
+
+            fetch(item.fetchLink)
+                .then(res => res.json())
+                .then(data => setLoadData(data.results))
+                .catch(err => console.log(err))
+        }
+    }
+
+
+    console.log(searchType)
     return (
         <section>
-            <h4 className='category_search'>Search by Category</h4>
+            <h4 className='category_search'>Search by: <span style={{ textDecoration: 'underline' }}>
+                {categorySearch}
+            </span></h4>
+            <div className='d-flex justify-content-between align-items-center px-5'>
+
             <ul className='movie_list_filter'>
                 {
                     CategoryBtn.map(item => (
-                        <li key={item.id} className={categorySearch === item.name ? 'activeCategory' : ''} onClick={() => setCategorySearch(item.name)}>{item.name}</li>
-                    ))
-                }
+                        <li onClick={() => categoryBtnClick(item)} key={item.id} className={categorySearch === item.name ? 'activeCategory' : ''} >{item.name}</li>
+                        ))
+                    }
             </ul>
+            <SearchDropDown searchType={searchType} setSearchType={setSearchType} dropDown={false}/>
+                    </div>
             <div className='d-flex div_movie_list'>
                 {
-                    allMovie.map(movie => (
+                    loadData.map(movie => (
                         <Movie favoriteBtn={true} key={movie.id} movie={movie} />
                     ))
                 }

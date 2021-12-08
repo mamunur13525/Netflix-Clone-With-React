@@ -26,7 +26,7 @@ const Movie = ({ movie }) => {
     }
     return (
         <div className='movie_list_div'>
-            <img onClick={movieClick} key={movie.id} className='list_movie_img' src={`http://image.tmdb.org/t/p/w1280${poster === null ? '/2Gi7Lu1pv8BeYiiGIsI3ILlLqHL.jpg' : poster}`} alt='Movie poster' />
+            <img loading='lazy' onClick={movieClick} key={movie.id} className='list_movie_img' src={`http://image.tmdb.org/t/p/w1280${poster === null ? '/2Gi7Lu1pv8BeYiiGIsI3ILlLqHL.jpg' : poster}`} alt='Movie poster' />
             <div className='movie_title_des'>
                 <h5 onClick={movieClick} >{movie.title}</h5>
                 <p onClick={movieClick} >{movie.overview && movie.overview.slice(0, 70)} <span onClick={movieClick} className='font-weight-bold'>Read More..</span></p>

@@ -41,6 +41,7 @@ function App() {
       }
       setAllMovie(arrayMovie)
     })
+      .catch(err => console.log(err))
   }, [])
   return (
     <MovileList.Provider value={[allMovie, setAllMovie]}>

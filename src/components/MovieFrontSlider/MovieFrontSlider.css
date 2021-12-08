@@ -42,6 +42,9 @@ img.slide_img {
 .slick-prev::before {
   font-size: 35px;
 }
+.slider_movie_{
+  height: 87vh;
+}
 .slick-slide {
   height: 87vh;
 }

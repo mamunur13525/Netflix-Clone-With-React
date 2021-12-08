@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import './Navbar.css';
 import netflixLogo from '../../images/Netflix-Logo.png';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
@@ -9,6 +9,8 @@ const Navbar = ({ signBtn }) => {
     const [favorite] = useContext(FavoriteList)
     const navigate = useNavigate();
     const { pathname } = useLocation()
+    const [searchType, setSearchType] = useState('')
+
     const logoClick = () => {
         navigate('/')
     }
@@ -16,7 +18,7 @@ const Navbar = ({ signBtn }) => {
         navigate('/login')
     }
     return (
-        <nav className='d-flex justify-content-between align-items-center px-4 py-3'>
+        <nav className='d-flex justify-content-between align-items-center  py-3'>
             <div className='logo-div'>
                 <img onClick={logoClick} className='w-100' src={netflixLogo} alt="logo" />
                 <div>
@@ -33,7 +35,7 @@ const Navbar = ({ signBtn }) => {
                 </div>
             </div>
             <div className='d-flex'>
-                <SearchDropDown />
+                <SearchDropDown searchType={searchType} setSearchType={setSearchType} dropDown={false} />
                 {
                     signBtn &&
                     <div>
