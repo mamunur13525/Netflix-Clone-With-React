@@ -13,7 +13,6 @@ const Login = ({ isLoginTrue }) => {
     return (
         <section className='background_image h-100vh'>
             <div className="landing_main_overlay">
-                <Navbar signBtn={false} />
                 <div className='login_box'>
                     <LoginSingup isLoginTrue={isLoginTrue} state={state} />
                 </div>

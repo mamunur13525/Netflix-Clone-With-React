@@ -8,7 +8,6 @@ import './Movies.css';
 const Movies = () => {
     return (
         <section className='landing_main_section'> 
-            <Navbar signBtn={true} />
             <MovieFrontSlider />
             <br/>
             <MovieList/>

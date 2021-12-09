@@ -1,81 +1,100 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useContext } from 'react';
 import { IoSearch, IoMdClose } from 'react-icons/all';
+import { Navigate, useLocation, useNavigate } from 'react-router';
+import { MovileList, SearchValue } from '../../App';
 import './SearchDropDown.css';
 
 
-const searchData = [
-    {
-        name: 'Stranget things,',
-        year: 'serie (2019)',
-        img: 'https://fiverr-res.cloudinary.com/images/q_auto,f_auto/gigs/144420796/original/a6f8ea9c2b6381d61eadaf017a714a1392777a55/photoshop-your-face-into-your-favourite-movie-poster.jpeg',
-        des: 'lorem ipsomm dolor sit amet, consectetuer adipicsing elit, sed diam nonummy nivb eimod tincidunt ut laoireet dolere amanga aliqam..'
-    }, {
-        name: 'game,',
-        year: 'serie (2019)',
-        img: 'https://fiverr-res.cloudinary.com/images/q_auto,f_auto/gigs/144420796/original/a6f8ea9c2b6381d61eadaf017a714a1392777a55/photoshop-your-face-into-your-favourite-movie-poster.jpeg',
-        des: 'lorem ipsomm dolor sit amet, consectetuer adipicsing elit, sed diam nonummy nivb eimod tincidunt ut laoireet dolere amanga aliqam..'
-    }
-]
 
 
-const SearchDropDown = ({searchType, dropDown, setSearchType}) => {
+
+const SearchDropDown = ({ searchType, setSearchType }) => {
+    const [allMovie] = useContext(MovileList)
     const [search, setSearch] = useState('All')
     const ref = useRef();
+    const { pathname } = useLocation()
+    const [searchInputChange, setSearchInputChange] = useContext(SearchValue)
+    const [searchData, setSearchData] = useState([]);
+    const navigate = useNavigate();
+
     useEffect(() => {
+
         function handleClickOutside(event) {
             if (ref.current && !ref.current.contains(event.target)) {
                 setSearchType('')
+                setSearchInputChange('')
             }
         }
         document.addEventListener("mousedown", handleClickOutside);
         return () => {
             document.removeEventListener("mousedown", handleClickOutside);
         };
+
     }, [ref]);
-    
+
+    const onCHnageText = (e) => {
+        setSearchInputChange(e.target.value)
+        setSearchType(e.target.value)
+    }
+
+    const filterData = allMovie.filter(item => {
+        if (!searchInputChange) {
+            return allMovie
+        } else {
+            return item.title.toLowerCase().includes(searchInputChange.toLowerCase())
+        }
+    })
+
+
+    console.log(searchData)
     return (
         <div ref={ref} className='search_with_dropdown'>
             <div className='search_box mr-2'>
-                <input onChange={(e) => setSearchType(e.target.value)} placeholder='Search Movie/Tv Shows' type="search" name="movie_search" id="movie_search" value={searchType} />
+                <input autoComplete='off' onChange={onCHnageText} placeholder='Search Movie/Tv Shows' type="text" name="movie_search" id="movie_search" value={searchInputChange} />
                 {
                     !searchType ?
                         <IoSearch /> :
-                        <IoMdClose style={{ cursor: 'pointer' }} onClick={() => setSearchType('')} />
+                        <IoMdClose style={{ cursor: 'pointer' }} onClick={() => { setSearchType(''); setSearchInputChange('') }} />
                 }
             </div>
-           {
-               dropDown &&
-               <div className={`search_result ${searchType ? 'show' : "hide"} `}>
-               <ul>
-                   <li className='search_type'>
-                       <span onClick={() => setSearch('All')} className={search === 'All' ? 'active' : ''} >All</span>
-                       <span onClick={() => setSearch('Movies')} className={search === 'Movies' ? 'active' : ''}>Movies</span>
-                       <span onClick={() => setSearch('Tv/Shows')} className={search === 'Tv/Shows' ? 'active' : ''}>Tv/Shows</span>
-                   </li>
-                   {
-                       searchData.map((item, index) => (
-                           <li className='movie_search_list' key={index}>
-                               <span>
-                                   <img src={item.img} alt="" />
-                               </span>
-                               <div>
-                                   <p className='search_title'>
-                                       {item.name}
-                                   </p>
-                                   <p className='search_year'>
-                                       {item.year}
-                                   </p>
-                                   <p className='search_des'>
-                                       {item.des}
-                                   </p>
-                               </div>
-                           </li>
-                       ))
-                   }
-                   <li className='more_results'>More results</li>
-               </ul>
-           </div>
-           }
+            {
+                pathname !== '/search-movie' &&
+                <div className={`search_result ${searchType ? 'show' : "hide"} `}>
+                    <ul>
+
+                        <li className='search_type'>
+                            <span onClick={() => setSearch('All')} className={search === 'All' ? 'active' : ''} >All</span>
+                            <span onClick={() => setSearch('Movies')} className={search === 'Movies' ? 'active' : ''}>Movies</span>
+                            <span onClick={() => setSearch('Tv/Shows')} className={search === 'Tv/Shows' ? 'active' : ''}>Tv/Shows</span>
+                        </li>
+                        {
+                            filterData.slice(0, 3).map((item) => (
+                                <li onClick={() => { navigate(`/movies/${item.id}`); setSearchType(''); setSearchInputChange('') }} className='movie_search_list' key={item.id}>
+                                    <span>
+
+                                        <img loading='lazy' className='list_movie_img' src={`http://image.tmdb.org/t/p/w1280/${item.poster_path}`} alt='Movie poster' />
+                                    </span>
+                                    <div>
+                                        <p className='search_title'>
+                                            {item.title}
+                                        </p>
+                                        <p className='search_year'>
+                                            {item.release_date}
+                                        </p>
+                                        <p className='search_des'>
+                                            {item.overview}
+                                        </p>
+                                    </div>
+                                </li>
+                            ))
+                        }
+                        {
+                            filterData.length === 0 && <p className='text-center text-white my-5 w-100'>No Movie Found..!</p>
+                        }
+                        <li onClick={() => { navigate('/search-movie'); setSearchType('') }} className='more_results'>More results</li>
+                    </ul>
+                </div>
+            }
         </div>
     );
 };

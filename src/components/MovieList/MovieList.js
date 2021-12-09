@@ -28,7 +28,8 @@ const MovieList = () => {
     const [allMovie] = useContext(MovileList);
     const [categorySearch, setCategorySearch] = useState('All');
     const [loadData, setLoadData] = useState([])
-    const [searchType,setSearchType] = useState('')
+    const [searchType, setSearchType] = useState('')
+    const [filterData, setFilterData] = useState([])
 
     useEffect(() => {
         if (allMovie.length) {
@@ -47,9 +48,18 @@ const MovieList = () => {
                 .catch(err => console.log(err))
         }
     }
+    useEffect(() => {
+        const filterDatas = loadData.filter((item) => {
+            if (!searchType) {
+                return loadData
+            } else {
+                return item.title.toLowerCase().includes(searchType.toLowerCase());
+            }
+        });
 
+        setFilterData(filterDatas)
+    }, [searchType, loadData])
 
-    console.log(searchType)
     return (
         <section>
             <h4 className='category_search'>Search by: <span style={{ textDecoration: 'underline' }}>
@@ -57,20 +67,23 @@ const MovieList = () => {
             </span></h4>
             <div className='d-flex justify-content-between align-items-center px-5'>
 
-            <ul className='movie_list_filter'>
-                {
-                    CategoryBtn.map(item => (
-                        <li onClick={() => categoryBtnClick(item)} key={item.id} className={categorySearch === item.name ? 'activeCategory' : ''} >{item.name}</li>
+                <ul className='movie_list_filter'>
+                    {
+                        CategoryBtn.map(item => (
+                            <li onClick={() => categoryBtnClick(item)} key={item.id} className={categorySearch === item.name ? 'activeCategory' : ''} >{item.name}</li>
                         ))
                     }
-            </ul>
-            <SearchDropDown searchType={searchType} setSearchType={setSearchType} dropDown={false}/>
-                    </div>
+                </ul>
+                <SearchDropDown searchType={searchType} setSearchType={setSearchType} dropDown={false} />
+            </div>
             <div className='d-flex div_movie_list'>
                 {
-                    loadData.map(movie => (
+                    filterData.map(movie => (
                         <Movie favoriteBtn={true} key={movie.id} movie={movie} />
                     ))
+                }
+                {
+                    filterData.length === 0 && <h3 className='text-white text-center my-5'>No Movie Found..!</h3>
                 }
 
             </div>

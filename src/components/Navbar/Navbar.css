@@ -5,7 +5,6 @@ nav {
   padding-right: 3.5rem;
   position: relative;
   z-index: 1;
-  
 }
 .logo-div {
   display: flex;
@@ -75,6 +74,7 @@ nav {
   margin: 0.1rem 0px;
   border-radius: 5px;
   width: 100%;
+  padding: 0.5rem;
 }
 .search_box input:focus {
   outline: none;

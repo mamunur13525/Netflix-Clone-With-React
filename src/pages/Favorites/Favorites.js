@@ -6,10 +6,9 @@ import './Favorites.css';
 
 const Favorites = () => {
     const [favorite] = useContext(FavoriteList)
-console.log(favorite.length)
+
     return (
         <section className='landing_main_section'>
-            <Navbar signBtn={true} />
             <div className='d-flex div_movie_list favorite'>
                 {
                     favorite.map(movie => (
