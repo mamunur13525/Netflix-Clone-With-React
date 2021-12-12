@@ -43,7 +43,7 @@ const LoginForm = () => {
         <>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <h1 className='text-white font-weight-bold mb-4'>Sign In</h1>
-                <input type="text" placeholder='Email or Phone Number' name='email' className='emailForm form-control mb-3 border-0 py-3' {...register("email", { required: true })} />
+                <input autoFocus type="text" placeholder='Email or Phone Number' name='email' className='emailForm form-control mb-3 border-0 py-3' {...register("email", { required: true })} />
                 {errors.email && <span className='text-warning warning_font '>This field is required</span>}
                 <input type="password" placeholder='Enter your password' name='password' className='emailForm form-control mb-3  border-0 py-3' {...register("password", { required: true })} />
                 {errors.password && <span className='text-warning warning_font '>This field is required</span>}

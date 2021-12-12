@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './LoginSingup.css';
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router";
+import { useNavigate, useLocation } from "react-router";
 import { useAuth } from '../../contexts/AuthContext';
 import { getAuth, updateProfile } from "firebase/auth";
 import ReactLoading from 'react-loading';
@@ -9,7 +9,8 @@ import ReactLoading from 'react-loading';
 const SingupForm = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const [loading, setLoading] = useState(false);
-
+    const location = useLocation();
+    console.log("🚀 ~ file: SingupForm.js ~ line 13 ~ SingupForm ~ location", location)
     const navigate = useNavigate()
     const { signUp, currentUsers, setCurrentUsers } = useAuth();
     const [error, setError] = useState({ status: false, message: '' })
@@ -57,10 +58,10 @@ const SingupForm = () => {
             <form onSubmit={handleSubmit(onSubmit)}>
                 <h1 className='text-white font-weight-bold mb-4'>Sign Up</h1>
 
-                <input type="text" placeholder='Enter your Name' name='name' className='emailForm form-control mb-3 border-0 py-3' {...register("name", { required: true })} />
+                <input autoFocus type="text" placeholder='Enter your Name' name='name' className='emailForm form-control mb-3 border-0 py-3' {...register("name", { required: true })} />
                 {errors.name && <span className='text-warning warning_font '>This field is required</span>}
 
-                <input type="text" placeholder='Email or Phone Number' name='email' className='emailForm form-control mb-3 border-0 py-3' {...register("email", { required: true })} />
+                <input defaultValue={location.state} type="text" placeholder='Email or Phone Number' name='email' className='emailForm form-control mb-3 border-0 py-3' {...register("email", { required: true })} />
                 {errors.email && <span className='text-warning warning_font '>This field is required</span>}
 
                 <input type="password" placeholder='Enter your password' name='password' className='emailForm form-control mb-3  border-0 py-3' {...register("password", { required: true })} />
@@ -79,7 +80,7 @@ const SingupForm = () => {
                         loading ?
                             <ReactLoading type='bubbles' color={'#ffffff'} width={50} height={40} />
                             :
-                            'Sign Up'   
+                            'Sign Up'
                     }
                 </button>
             </form>
