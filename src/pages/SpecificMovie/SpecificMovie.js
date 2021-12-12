@@ -1,5 +1,4 @@
 import React, { useState, useContext, useEffect } from 'react';
-import Navbar from '../../components/Navbar/Navbar';
 import './SpecificMovie.css';
 import { useParams } from 'react-router-dom';
 import { FavoriteList } from '../../App';
@@ -14,6 +13,7 @@ const SpecificMovie = () => {
     const [findMovie, setFindMovie] = useState({})
     const [watchVideo, setWatchVideo] = useState({ status: false, key: '' })
     useEffect(() => {
+        window.scrollTo(0,0)
         if (id) {
             fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=1a12ab4d115a6496ed52f90f1149fbd4&append_to_response=videos,credits&language=en-US`)
                 .then(res => res.json())
@@ -152,7 +152,6 @@ const Recommandation = () => {
                 })
         }
     }, [id])
-    console.log({ recommmandation })
     return (
         <div className='landing_main_section h-auto'>
             {
@@ -161,7 +160,7 @@ const Recommandation = () => {
                     <h2 className='text-white font-weight-bold px-5 pt-5 mb-4'>Recommandation</h2>
                     <div className='d-flex div_movie_list'>
                         {
-                            recommmandation.slice(0, 6).map(movie => (
+                            recommmandation.slice(0, 12).map(movie => (
                                 <Movie favoriteBtn={false} key={movie.id} movie={movie} />
                             ))
                         }

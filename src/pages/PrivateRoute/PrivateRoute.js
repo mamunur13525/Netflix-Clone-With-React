@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useLocation, Navigate } from 'react-router';
+import { useAuth } from '../../contexts/AuthContext';
 
 
 function PrivateRoute({ children }) {
-    const [ifLoggedIn] = useState(false)
+    const { currentUsers } = useAuth();
     const location = useLocation();
 
-    return ifLoggedIn === false
+    return currentUsers.email
         ? children
         : <Navigate to="/login" replace state={{ path: location.pathname }} />;
 }

@@ -1,36 +1,33 @@
 import React, { useState, useEffect, useRef, useContext } from 'react';
 import { IoSearch, IoMdClose } from 'react-icons/all';
-import { Navigate, useLocation, useNavigate } from 'react-router';
+import {  useLocation, useNavigate } from 'react-router';
 import { MovileList, SearchValue } from '../../App';
 import './SearchDropDown.css';
 
-
-
-
-
 const SearchDropDown = ({ searchType, setSearchType }) => {
     const [allMovie] = useContext(MovileList)
-    const [search, setSearch] = useState('All')
-    const ref = useRef();
     const { pathname } = useLocation()
     const [searchInputChange, setSearchInputChange] = useContext(SearchValue)
-    const [searchData, setSearchData] = useState([]);
+    const ref = useRef();
     const navigate = useNavigate();
+    const [isMenuOpen, setIsMenuOpen] = useState(false)
 
     useEffect(() => {
-
-        function handleClickOutside(event) {
-            if (ref.current && !ref.current.contains(event.target)) {
-                setSearchType('')
-                setSearchInputChange('')
+        const checkIfClickedOutside = e => {
+            // If the menu is open and the clicked target is not within the menu,
+            // then close the menu
+            if (isMenuOpen && ref.current && !ref.current.contains(e.target)) {
+                setIsMenuOpen(false)
             }
         }
-        document.addEventListener("mousedown", handleClickOutside);
-        return () => {
-            document.removeEventListener("mousedown", handleClickOutside);
-        };
 
-    }, [ref]);
+        document.addEventListener("mousedown", checkIfClickedOutside)
+
+        return () => {
+            // Cleanup the event listener
+            document.removeEventListener("mousedown", checkIfClickedOutside)
+        }
+    }, [isMenuOpen])
 
     const onCHnageText = (e) => {
         setSearchInputChange(e.target.value)
@@ -45,12 +42,10 @@ const SearchDropDown = ({ searchType, setSearchType }) => {
         }
     })
 
-
-    console.log(searchData)
     return (
         <div ref={ref} className='search_with_dropdown'>
             <div className='search_box mr-2'>
-                <input autoComplete='off' onChange={onCHnageText} placeholder='Search Movie/Tv Shows' type="text" name="movie_search" id="movie_search" value={searchInputChange} />
+                <input onFocus={() => setIsMenuOpen(true)} autoComplete='off' onChange={onCHnageText} placeholder='Search Movies' type="text" name="movie_search" id="movie_search" value={searchInputChange} />
                 {
                     !searchType ?
                         <IoSearch /> :
@@ -59,14 +54,8 @@ const SearchDropDown = ({ searchType, setSearchType }) => {
             </div>
             {
                 pathname !== '/search-movie' &&
-                <div className={`search_result ${searchType ? 'show' : "hide"} `}>
+                <div className={`search_result ${isMenuOpen ? 'show' : "hide"} `}>
                     <ul>
-
-                        <li className='search_type'>
-                            <span onClick={() => setSearch('All')} className={search === 'All' ? 'active' : ''} >All</span>
-                            <span onClick={() => setSearch('Movies')} className={search === 'Movies' ? 'active' : ''}>Movies</span>
-                            <span onClick={() => setSearch('Tv/Shows')} className={search === 'Tv/Shows' ? 'active' : ''}>Tv/Shows</span>
-                        </li>
                         {
                             filterData.slice(0, 3).map((item) => (
                                 <li onClick={() => { navigate(`/movies/${item.id}`); setSearchType(''); setSearchInputChange('') }} className='movie_search_list' key={item.id}>

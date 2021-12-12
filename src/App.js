@@ -6,6 +6,7 @@ import {
 
 import Navbar from './components/Navbar/Navbar';
 import RoutePage from './Route/RoutePage';
+import { AuthProvider } from './contexts/AuthContext';
 
 export const FavoriteList = createContext();
 export const MovileList = createContext();
@@ -39,16 +40,18 @@ function App() {
       .catch(err => console.log(err))
   }, [])
   return (
-    <MovileList.Provider value={[allMovie, setAllMovie]}>
-      <FavoriteList.Provider value={[favorite, setFavorite]}>
-        <SearchValue.Provider value={[searchInputChange, setSearchInputChange]}>
-          <BrowserRouter>
-            <Navbar />
-            <RoutePage />
-          </BrowserRouter >
-        </SearchValue.Provider>
-      </FavoriteList.Provider>
-    </MovileList.Provider>
+    <AuthProvider>
+      <MovileList.Provider value={[allMovie, setAllMovie]}>
+        <FavoriteList.Provider value={[favorite, setFavorite]}>
+          <SearchValue.Provider value={[searchInputChange, setSearchInputChange]}>
+            <BrowserRouter>
+              <Navbar />
+              <RoutePage />
+            </BrowserRouter >
+          </SearchValue.Provider>
+        </FavoriteList.Provider>
+      </MovileList.Provider>
+    </AuthProvider>
   );
 }
 

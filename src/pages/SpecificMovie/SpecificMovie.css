@@ -9,7 +9,6 @@
   color: white;
   position: absolute;
   left: 50%;
-  z-index: 1;
   top: 50%;
   transform: translate(-50%, -50%);
   height: 82%;

@@ -2,15 +2,43 @@ import React, { useState } from 'react';
 import './LoginSingup.css';
 import { useForm } from "react-hook-form";
 import { useNavigate } from 'react-router';
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import ReactLoading from 'react-loading';
 
 const LoginForm = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const navigate = useNavigate();
     const [learnMore, setLearnMore] = useState(false);
-    const onSubmit = data => console.log(data);
+    const [loading, setLoading] = useState(false);
+    const [err, setErr] = useState({ status: false, message: '' })
+    const auth = getAuth();
+    const onSubmit = data => {
+        setLoading(true)
+        signInWithEmailAndPassword(auth, data.email, data.password)
+            .then((userCredential) => {
+                setLoading(true)
+                // Signed in 
+                const user = userCredential.user;
+                navigate('/movies')
+                console.log(user)
+                // ...
+            })
+            .catch((error) => {
+                setLoading(false)
+                const errorMessage = error.message;
+                if (errorMessage === 'Firebase: Error (auth/wrong-password).') {
+                    setErr({ status: true, message: 'Password not mathed.!' })
+                } else if (errorMessage === 'Firebase: Error (auth/user-not-found).') {
+                    setErr({ status: true, message: 'Email not found..!' })
+                }
+                console.log({ error })
+            });
+    };
+
     const clickToSingUp = () => {
         navigate('/signup')
     }
+
     return (
         <>
             <form onSubmit={handleSubmit(onSubmit)}>
@@ -19,7 +47,18 @@ const LoginForm = () => {
                 {errors.email && <span className='text-warning warning_font '>This field is required</span>}
                 <input type="password" placeholder='Enter your password' name='password' className='emailForm form-control mb-3  border-0 py-3' {...register("password", { required: true })} />
                 {errors.password && <span className='text-warning warning_font '>This field is required</span>}
-                <button type='submit' className='red_button font-weight-bold w-100 mt-4 py-2'>Sign In</button>
+
+                {
+                    err.status && <p className='text-danger'>{err.message}</p>
+                }
+                <button disabled={loading} type='submit' className='red_button font-weight-bold w-100 mt-4 py-2'>
+                    {
+                        loading ?
+                            <ReactLoading type='bubbles' color={'#ffffff'} width={50} height={43} />
+                            :
+                            'Sign In'
+                    }
+                </button>
             </form>
             <div className='d-flex justify-content-between mt-2'>
                 <div>

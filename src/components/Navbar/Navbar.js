@@ -1,17 +1,20 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useContext, useState } from 'react';
 import './Navbar.css';
 import netflixLogo from '../../images/Netflix-Logo.png';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import SearchDropDown from '../SearchableDropdown/SearchDropDown';
-import { FavoriteList, SearchValue } from '../../App';
-
+import { FavoriteList } from '../../App';
+import { useAuth } from '../../contexts/AuthContext';
+import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 
 const Navbar = () => {
     const [favorite] = useContext(FavoriteList)
     const navigate = useNavigate();
     const { pathname } = useLocation()
     const [searchType, setSearchType] = useState('')
-    const [searchInputChange, setSearchInputChange] = useContext(SearchValue)
+    const { currentUsers } = useAuth();
+    const { setCurrentUsers } = useAuth();
+    const auth = getAuth();
 
     const logoClick = () => {
         navigate('/')
@@ -19,7 +22,25 @@ const Navbar = () => {
     const singIn = () => {
         navigate('/login')
     }
-   
+
+    useEffect(() => {
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                setCurrentUsers({ name: user.displayName, email: user.email })
+            }
+        });
+    }, [])
+
+    const logoutClick = () => {
+        signOut(auth).then((data) => {
+            // Sign-out successful.
+            console.log(data)
+            setCurrentUsers({})
+        }).catch((error) => {
+            console.log(error)
+            // An error happened.
+        });
+    }
 
     return (
         <nav style={{ background: '#1f1f1f' }} className='d-flex justify-content-between align-items-center  py-3'>
@@ -28,7 +49,6 @@ const Navbar = () => {
                 <div>
                     <ul>
                         <li className={pathname === '/movies' ? 'active' : ''}><Link to='/movies'>Movies</Link></li>
-                        <li className={pathname === '/tvshows' ? 'active' : ''}><Link to='/tvshows'>Tv Shows</Link></li>
                         <li className={pathname === '/favorites' ? 'active favoriteNav' : ' favoriteNav'}><Link to='/favorites'>My Favorites
                             {
                                 favorite.length !== 0 &&
@@ -38,14 +58,31 @@ const Navbar = () => {
                     </ul>
                 </div>
             </div>
-            <div className='d-flex'>
-                <SearchDropDown  searchType={searchType} setSearchType={setSearchType}  />
+            <div className='d-flex align-items-center'>
+                <SearchDropDown searchType={searchType} setSearchType={setSearchType} />
                 {
-                    pathname === '/' &&
+                    (pathname === '/' && !currentUsers?.name) &&
                     <div>
                         <button onClick={singIn} className='red_button h-100 sign_up_button'>
                             Sign In
                         </button>
+                    </div>
+                }
+                {
+                    currentUsers.name &&
+                    <div className="dropdown ml-3">
+                        <div id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" className='text-danger d-flex align-items-center justify-content-start mb-0'>
+                            <span className='user_name '>
+                                {currentUsers.name}
+                            </span>
+                            <div className='name_logo'>
+                                {currentUsers && currentUsers.name?.slice(0, 2)}
+                            </div>
+
+                        </div>
+                        <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <span onClick={logoutClick} className="dropdown-item" href="#">Log out</span>
+                        </div>
                     </div>
                 }
             </div>

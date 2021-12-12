@@ -16,11 +16,30 @@ const RoutePage = () => {
             <Route exact path='/' element={<LandingPage />} />
             <Route path='/login' element={<Login isLoginTrue={true} />} />
             <Route path='/signup' element={<Login isLoginTrue={false} />} />
-            <Route path='/movies' element={<Movies />} />
-            <Route path='/movies/:id' element={<SpecificMovie />} />
             <Route path='/search-movie' element={<MovieSearch />} />
-            <Route path='/tvshows' element={<TvShow />} />
-            <Route path='/favorites' element={<Favorites />} />
+
+            <Route
+                path="/favorites"
+                element={
+                    <PrivateRoute>
+                        <Favorites />
+                    </PrivateRoute>
+                }
+            />       <Route
+                path="/movies"
+                element={
+                    <PrivateRoute>
+                        <Movies />
+                    </PrivateRoute>
+                }
+            />     <Route
+                path="/movies/:id"
+                element={
+                    <PrivateRoute>
+                        <SpecificMovie />
+                    </PrivateRoute>
+                }
+            />
             <Route
                 path="/other"
                 element={

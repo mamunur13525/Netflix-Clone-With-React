@@ -50,6 +50,8 @@ nav {
   height: auto;
   border-radius: 3px;
   line-height: 1.9;
+  display: flex;
+  justify-content: center;
 }
 .search_box {
   padding: 0.2rem 1rem 0.2rem 0.8rem;
@@ -74,7 +76,7 @@ nav {
   margin: 0.1rem 0px;
   border-radius: 5px;
   width: 100%;
-  padding: 0.5rem;
+  padding: 0.2rem 0.5rem;
 }
 .search_box input:focus {
   outline: none;
@@ -104,4 +106,33 @@ nav {
   text-align: center;
   top: -0.3em;
   right: -1rem;
+}
+
+.name_logo {
+  background: #005070;
+  color: white;
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  font-size: 1.4rem;
+  padding-top: 0.5rem;
+  font-weight: 700;
+}
+.user_name {
+  width: 60%;
+  margin-left: 0.3rem;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: white;
+
+}
+.dropdown {
+  margin-left: 0.3rem;
+  cursor: pointer;
 }
