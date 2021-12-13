@@ -14,6 +14,7 @@ const Navbar = () => {
     const [searchType, setSearchType] = useState('')
     const { currentUsers } = useAuth();
     const { setCurrentUsers } = useAuth();
+
     const auth = getAuth();
 
     const logoClick = () => {
@@ -29,6 +30,7 @@ const Navbar = () => {
                 setCurrentUsers({ name: user.displayName, email: user.email })
             }
         });
+        // eslint-disable-next-line
     }, [])
 
     const logoutClick = () => {
@@ -42,6 +44,7 @@ const Navbar = () => {
         });
     }
 
+    console.log({ currentUsers })
     return (
         <nav style={{ background: '#1f1f1f' }} className='d-flex justify-content-between align-items-center  py-3'>
             <div className='logo-div'>
@@ -68,8 +71,9 @@ const Navbar = () => {
                         </button>
                     </div>
                 }
+
                 {
-                    currentUsers.name &&
+                    currentUsers.email &&
                     <div className="dropdown ml-3">
                         <div id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" className='text-danger d-flex align-items-center justify-content-start mb-0'>
                             <span className='user_name '>

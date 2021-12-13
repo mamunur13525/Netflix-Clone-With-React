@@ -10,7 +10,6 @@ const Subcripiton = () => {
     const onSubmit = (data) => {
         console.log(data)
         navigate("/signup", { state: data.email })
-        // navigate({ pathname: '/signup', state: data.email })
     }
     return (
         <form onSubmit={handleSubmit(onSubmit)}>

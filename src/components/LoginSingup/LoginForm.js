@@ -2,26 +2,27 @@ import React, { useState } from 'react';
 import './LoginSingup.css';
 import { useForm } from "react-hook-form";
 import { useNavigate } from 'react-router';
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import ReactLoading from 'react-loading';
+import { GoogleAuthProvider } from "firebase/auth";
+import { useAuth } from '../../contexts/AuthContext';
+import { FcGoogle } from 'react-icons/all';
 
 const LoginForm = () => {
+    const provider = new GoogleAuthProvider();
     const { register, handleSubmit, formState: { errors } } = useForm();
     const navigate = useNavigate();
     const [learnMore, setLearnMore] = useState(false);
     const [loading, setLoading] = useState(false);
     const [err, setErr] = useState({ status: false, message: '' })
     const auth = getAuth();
+    const { setCurrentUsers } = useAuth();
     const onSubmit = data => {
         setLoading(true)
         signInWithEmailAndPassword(auth, data.email, data.password)
-            .then((userCredential) => {
+            .then(() => {
                 setLoading(true)
-                // Signed in 
-                const user = userCredential.user;
                 navigate('/movies')
-                console.log(user)
-                // ...
             })
             .catch((error) => {
                 setLoading(false)
@@ -37,6 +38,20 @@ const LoginForm = () => {
 
     const clickToSingUp = () => {
         navigate('/signup')
+    }
+
+    const googleLogin = () => {
+        signInWithPopup(auth, provider)
+            .then((result) => {
+                setLoading(false)
+                const user = result.user;
+                setCurrentUsers({ name: user.displayName, email: user.email })
+                navigate('/movies')
+            }).catch((error) => {
+                setLoading(false)
+                const errorMessage = error.message;
+                setErr({ status: true, message: errorMessage })
+            });
     }
 
     return (
@@ -71,9 +86,9 @@ const LoginForm = () => {
                     </span>
                 </div>
             </div>
-            <div className='form_text mt-4'>
-                <img className='hovertoCursor' style={{ width: '20px', height: '20px', marginRight: '0.5rem' }} src='https://assets.nflxext.com/ffe/siteui/login/images/FB-f-Logo__blue_57.png' alt='facebook' />
-                <span className='ml-2'>Login with Facebook</span>
+            <div style={{ cursor: 'pointer', }} onClick={googleLogin} className='form_text mt-4 '>
+                <FcGoogle style={{ marginRight: '.3rem', fontSize: '1.8rem' }} className='mr-4' />
+                <span style={{ fontSize: '1rem', fontWeight: 'bold' }}>Login with Google</span>
             </div>
             <p className='form_text font-16 mt-2'>
                 New to Netflix? <span onClick={clickToSingUp} className='text-light hovertoCursor'>Sign up now.</span>

@@ -3,16 +3,19 @@ import './LoginSingup.css';
 import { useForm } from "react-hook-form";
 import { useNavigate, useLocation } from "react-router";
 import { useAuth } from '../../contexts/AuthContext';
-import { getAuth, updateProfile } from "firebase/auth";
+import { getAuth, updateProfile, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import ReactLoading from 'react-loading';
+import { FcGoogle } from 'react-icons/all';
+
 
 const SingupForm = () => {
+    const provider = new GoogleAuthProvider();
     const { register, handleSubmit, formState: { errors } } = useForm();
     const [loading, setLoading] = useState(false);
     const location = useLocation();
-    console.log("🚀 ~ file: SingupForm.js ~ line 13 ~ SingupForm ~ location", location)
     const navigate = useNavigate()
-    const { signUp, currentUsers, setCurrentUsers } = useAuth();
+    const auth = getAuth();
+    const { signUp, setCurrentUsers } = useAuth();
     const [error, setError] = useState({ status: false, message: '' })
 
     const onSubmit = data => {
@@ -51,6 +54,20 @@ const SingupForm = () => {
     }
     const clickToSignIn = () => {
         navigate('/login')
+    }
+
+    const googleLogin = () => {
+        signInWithPopup(auth, provider)
+            .then((result) => {
+                setLoading(false)
+                const user = result.user;
+                setCurrentUsers({ name: user.displayName, email: user.email })
+                navigate('/movies')
+            }).catch((error) => {
+                setLoading(false)
+                const errorMessage = error.message;
+                setError({ status: true, message: errorMessage })
+            });
     }
 
     return (
@@ -95,9 +112,9 @@ const SingupForm = () => {
                     </span>
                 </div>
             </div>
-            <div className='form_text mt-4'>
-                <img className='hovertoCursor' style={{ width: '20px', height: '20px', marginRight: '0.5rem' }} src='https://assets.nflxext.com/ffe/siteui/login/images/FB-f-Logo__blue_57.png' alt='facebook' />
-                <span className='ml-2'>Login with Facebook</span>
+            <div style={{ cursor: 'pointer', }} onClick={googleLogin} className='form_text mt-4 '>
+                <FcGoogle style={{ marginRight: '.3rem', fontSize: '1.8rem' }} className='mr-4' />
+                <span style={{ fontSize: '1rem', fontWeight: 'bold' }}>Login with Google</span>
             </div>
             <p className='form_text font-16 mt-2'>
                 Old to Netflix? <span onClick={clickToSignIn} className='text-light hovertoCursor'>Sign In now.</span>

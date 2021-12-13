@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
 import { FavoriteList } from '../../App';
 import Movie from '../../components/MovieList/Movie';
-import Navbar from '../../components/Navbar/Navbar';
 import './Favorites.css';
 
 const Favorites = () => {

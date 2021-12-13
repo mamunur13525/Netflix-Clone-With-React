@@ -1,7 +1,6 @@
 import React from 'react';
 import LandingMainContent from '../../components/LandingMainContent/LandingMainContent';
 import LandingSection from '../../components/LandingSection/LandingSection';
-import Navbar from '../../components/Navbar/Navbar';
 import './LandingPage.css';
 import playerBox from '../../images/tv-frame.png';
 import mobileFrame from '../../images/mobile-girl.jpg';

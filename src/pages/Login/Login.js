@@ -6,7 +6,6 @@ import './Login.css';
 
 const Login = ({ isLoginTrue }) => {
     const location = useLocation();
-    console.log("🚀 ~ file: Login.js ~ line 9 ~ Login ~ location", location)
 
     return (
         <section className='background_image h-100vh'>
