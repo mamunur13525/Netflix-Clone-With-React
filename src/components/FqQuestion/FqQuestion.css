@@ -1,9 +1,25 @@
-.fq_div{
-    padding: 70px 45px;
-    color: white;
-    width: 72%;
-    margin: auto;
+.fq_div {
+  padding: 70px 45px;
+  color: white;
+  width: 72%;
+  margin: auto;
 }
-.fq_accourdion.accordion{
-    margin: .5rem 0rem;
+.fq_accourdion.accordion {
+  margin: 0.5rem 0rem;
+}
+.accordion-button::after {
+  display: none;
+}
+
+@media (max-width: 1000px) {
+  .fq_div {
+    width: 95%;
+    margin: auto;
+  }
+}
+@media (max-width: 1000px) {
+  .fq_div {
+    padding-left: 0px;
+    padding-right: 0px;
+  }
 }

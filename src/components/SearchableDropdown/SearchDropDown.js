@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef, useContext } from 'react';
 import { IoSearch, IoMdClose } from 'react-icons/all';
-import {  useLocation, useNavigate } from 'react-router';
+import { useLocation, useNavigate } from 'react-router';
 import { MovileList, SearchValue } from '../../App';
 import './SearchDropDown.css';
 
@@ -58,7 +58,7 @@ const SearchDropDown = ({ searchType, setSearchType }) => {
                     <ul>
                         {
                             filterData.slice(0, 3).map((item) => (
-                                <li onClick={() => { navigate(`/movies/${item.id}`); setSearchType(''); setSearchInputChange('') }} className='movie_search_list' key={item.id}>
+                                <li onClick={() => { setIsMenuOpen(false); navigate(`/movies/${item.id}`); setSearchType(''); setSearchInputChange('') }} className='movie_search_list' key={item.id}>
                                     <span>
 
                                         <img loading='lazy' className='list_movie_img' src={`http://image.tmdb.org/t/p/w1280/${item.poster_path}`} alt='Movie poster' />
@@ -80,7 +80,7 @@ const SearchDropDown = ({ searchType, setSearchType }) => {
                         {
                             filterData.length === 0 && <p className='text-center text-white my-5 w-100'>No Movie Found..!</p>
                         }
-                        <li onClick={() => { navigate('/search-movie'); setSearchType('') }} className='more_results'>More results</li>
+                        <li onClick={() => {   setIsMenuOpen(false);navigate('/search-movie'); setSearchType('') }} className='more_results'>More results</li>
                     </ul>
                 </div>
             }

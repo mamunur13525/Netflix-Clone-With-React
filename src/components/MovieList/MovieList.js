@@ -76,7 +76,7 @@ const MovieList = () => {
                 </ul>
                 <SearchDropDown searchType={searchType} setSearchType={setSearchType} dropDown={false} />
             </div>
-            <div className='d-flex div_movie_list'>
+            <div className='d-flex div_movie_list flex-wrap'>
                 {
                     filterData.map(movie => (
                         <Movie favoriteBtn={true} key={movie.id} movie={movie} />

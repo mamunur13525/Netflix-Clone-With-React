@@ -13,7 +13,7 @@ const SpecificMovie = () => {
     const [findMovie, setFindMovie] = useState({})
     const [watchVideo, setWatchVideo] = useState({ status: false, key: '' })
     useEffect(() => {
-        window.scrollTo(0,0)
+        window.scrollTo(0, 0)
         if (id) {
             fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=1a12ab4d115a6496ed52f90f1149fbd4&append_to_response=videos,credits&language=en-US`)
                 .then(res => res.json())
@@ -43,16 +43,16 @@ const SpecificMovie = () => {
             <section className='landing_main_section h-100'>
                 <div className='specific'>
                     <div className="">
-                      
+
                         <img className='background_image_specific' src={`http://image.tmdb.org/t/p/w1280${findMovie && findMovie.backdrop_path}`} alt="img" />
                         <main className='movie_content'>
-                            <img src={`http://image.tmdb.org/t/p/w1280${findMovie && findMovie.poster_path}`} alt="Movie poster" />
+                            <img className='specific_poster_image' src={`http://image.tmdb.org/t/p/w1280${findMovie && findMovie.poster_path}`} alt="Movie poster" />
                             <div className="content_side">
                                 <h2 className='font-weight-bold'>
                                     <span>{findMovie?.title}</span>
                                 </h2>
                                 <p className='description mt-0 specific_description' style={{ fontSize: '1rem' }}>{findMovie?.overview}</p>
-                                <div className='d-flex justify-content-between align-item-end'>
+                                <div className='d-flex justify-content-between align-item-end flex-wrap'>
                                     <div className="item-rating">
                                         <img src="https://netflix-clone-by-shivam.netlify.app/static/media/imdb.f7f2904f.png" alt="imdb" className="item-rating__imdb" />
                                         <span className="item-rating__rank">{findMovie?.vote_average}/10</span>
@@ -63,7 +63,7 @@ const SpecificMovie = () => {
                                     </h5>
                                 </div>
                                 <h4 className='font-weight-bold mt-3'>Cast</h4>
-                                <div className="d-flex justify-content-evenly">
+                                <div className="d-flex justify-content-evenly flex-wrap">
                                     {
                                         findMovie?.credits?.cast?.slice(0, 4).map(item => (
                                             <div key={item.id} className='cast_img'>
@@ -77,7 +77,7 @@ const SpecificMovie = () => {
                                         ))
                                     }
                                 </div>
-                                <div className='d-flex mt-3' >
+                                <div className='d-flex mt-3 flex-wrap' >
                                     <button style={{ fontSize: '.9rem' }} onClick={() => favoriteCLick(findMovie && findMovie)} className='favorite_btn '>
                                         <span>
                                             {
@@ -96,9 +96,7 @@ const SpecificMovie = () => {
                                         <AiOutlineEye />   Watch Trailer
                                     </button>
 
-                                    {
-                                        watchVideo.status && <TrailerVideo setWatchVideo={setWatchVideo} watchVideo={watchVideo} />
-                                    }
+
                                 </div>
 
                             </div>
@@ -107,6 +105,9 @@ const SpecificMovie = () => {
 
                     </div>
                 </div>
+                {
+                    watchVideo.status && <TrailerVideo setWatchVideo={setWatchVideo} watchVideo={watchVideo} />
+                }
             </section>
             <Recommandation />
         </>
@@ -120,11 +121,11 @@ const TrailerVideo = ({ watchVideo, setWatchVideo }) => {
     return (
         <div className='overlayOutside'>
             <div className='popup_video'>
-                <p className='d-flex justify-content-between w-100 p-3 mb-0 pb-2'>
+                <p className='d-flex justify-content-between w-100 p-3 mb-0 pb-2 text-white'>
                     <span>
                         Play Trailer
                     </span>
-                    <IoClose className='cursor-pointer' onClick={() => setWatchVideo({ status: false, key: '' })} />
+                    <IoClose style={{fontSize:'2rem'}} className='cursor-pointer ' onClick={() => setWatchVideo({ status: false, key: '' })} />
                 </p>
                 {
                     watchVideo.status &&
@@ -153,7 +154,7 @@ const Recommandation = () => {
         }
     }, [id])
     return (
-        <div className='landing_main_section h-auto'>
+        <div className='landing_main_section h-auto recomandation_section'>
             {
                 recommmandation.length &&
                 <>

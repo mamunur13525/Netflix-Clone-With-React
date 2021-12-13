@@ -73,10 +73,10 @@ const Footer = () => {
                 <p className="footer_header">
                     Questions? Contact us.
                 </p>
-                <div className='d-flex justify-content-between' >
+                <div className='d-flex justify-content-between flex-wrap footer_div' >
                     {
                         ulBoxFirst.map((item, index) => (
-                            <ul className='footer_ul' key={index}>
+                            <ul className='footer_ul ' key={index}>
                                 {item.ul.map((li, ind) => (
                                     <li key={ind}>
                                         {li.li}

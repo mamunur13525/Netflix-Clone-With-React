@@ -83,7 +83,7 @@ const MovieFrontSlider = () => {
                                     </div>
                                 </div>
                             </div>
-                            <div>
+                            <div className='slide_image_div'>
                                 <img className='slide_img' src={`http://image.tmdb.org/t/p/w1280${movie.backdrop_path}`} alt='img' />
                             </div>
                         </div>

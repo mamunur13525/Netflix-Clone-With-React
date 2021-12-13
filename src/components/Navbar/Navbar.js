@@ -46,7 +46,8 @@ const Navbar = () => {
 
     console.log({ currentUsers })
     return (
-        <nav style={{ background: '#1f1f1f' }} className='d-flex justify-content-between align-items-center  py-3'>
+        <nav style={{ background: '#1f1f1f' }} className="navbar navbar-expand-lg navbar-dark bg-dark">
+
             <div className='logo-div'>
                 <img onClick={logoClick} className='w-100 cursor-pointer' src={netflixLogo} alt="logo" />
                 <div>
@@ -61,34 +62,40 @@ const Navbar = () => {
                     </ul>
                 </div>
             </div>
-            <div className='d-flex align-items-center'>
-                <SearchDropDown searchType={searchType} setSearchType={setSearchType} />
-                {
-                    (pathname === '/' && !currentUsers?.name) &&
-                    <div>
-                        <button onClick={singIn} className='red_button h-100 sign_up_button'>
-                            Sign In
-                        </button>
-                    </div>
-                }
+            <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span className="navbar-toggler-icon"></span>
+            </button>
 
-                {
-                    currentUsers.email &&
-                    <div className="dropdown ml-3">
-                        <div id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" className='text-danger d-flex align-items-center justify-content-start mb-0'>
-                            <span className='user_name '>
-                                {currentUsers.name}
-                            </span>
-                            <div className='name_logo'>
-                                {currentUsers && currentUsers.name?.slice(0, 2)}
+            <div className="collapse navbar-collapse " id="navbarSupportedContent">
+                <div className='d-flex align-items-center margin-left-auto flex-direction-coloumn'>
+                    <SearchDropDown searchType={searchType} setSearchType={setSearchType} />
+                    {
+                        (pathname === '/' && !currentUsers?.name) &&
+                        <div>
+                            <button onClick={singIn} className='red_button h-100 sign_up_button'>
+                                Sign In
+                            </button>
+                        </div>
+                    }
+
+                    {
+                        currentUsers.email &&
+                        <div className="dropdown ml-3">
+                            <div id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" className='text-danger d-flex align-items-center justify-content-start mb-0'>
+                                <span className='user_name '>
+                                    {currentUsers.name}
+                                </span>
+                                <div className='name_logo'>
+                                    {currentUsers && currentUsers.name?.slice(0, 2)}
+                                </div>
+
                             </div>
-
+                            <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <span onClick={logoutClick} className="dropdown-item" href="#">Log out</span>
+                            </div>
                         </div>
-                        <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <span onClick={logoutClick} className="dropdown-item" href="#">Log out</span>
-                        </div>
-                    </div>
-                }
+                    }
+                </div>
             </div>
         </nav>
     );

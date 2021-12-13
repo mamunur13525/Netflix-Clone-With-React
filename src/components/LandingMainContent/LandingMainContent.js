@@ -13,7 +13,7 @@ const LandingMainContent = () => {
                 <h3 className='subtitle mt-2'>
                     Watch anywhere. Cancel anytime.
                 </h3>
-              <Subcripiton/>
+                <Subcripiton />
             </div>
         </main>
     );

@@ -8,11 +8,10 @@ const Subcripiton = () => {
     const { register, handleSubmit } = useForm();
     const navigate = useNavigate();
     const onSubmit = (data) => {
-        console.log(data)
         navigate("/signup", { state: data.email })
     }
     return (
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form className='form_subcription' onSubmit={handleSubmit(onSubmit)}>
             <p className='mt-4 nested_sub_title text-center'>
                 Ready to watch? Enter your email to create or restart your membership
             </p>

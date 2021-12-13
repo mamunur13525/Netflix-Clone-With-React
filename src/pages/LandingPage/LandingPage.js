@@ -41,7 +41,9 @@ const LandingPage = () => {
         <section className='landing_main_section '>
             <div className='background_image'>
                 <div className="landing_main_overlay">
-                    <LandingMainContent />
+                    <div style={{ marginRight: '0px' }} className="row">
+                        <LandingMainContent />
+                    </div>
                 </div>
             </div>
             {

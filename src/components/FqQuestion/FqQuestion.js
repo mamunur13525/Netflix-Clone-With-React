@@ -42,7 +42,7 @@ const FqQuestion = () => {
                 }
                 </Accordion>
             </div>
-            <div className='w-50 m-auto py-5 mb-2'>
+            <div className='m-auto py-5 mb-2'>
                     <Subcripiton />
                 </div>
         </section>

@@ -1,9 +1,10 @@
 .movie_list_div {
-  width: 16%;
+  width: 198px;
   margin-bottom: 1rem;
   cursor: pointer;
   transition: all ease-in 0.2s;
   position: relative;
+
 }
 .list_movie_img {
   color: white;
@@ -35,15 +36,14 @@
 }
 .movie_title_des h5 {
   font-weight: 800;
-  filter: drop-shadow(0 0 .3rem rgb(0, 0, 0));
+  filter: drop-shadow(0 0 0.3rem rgb(0, 0, 0));
 }
 .movie_title_des p {
   line-height: 1.1;
   height: 2.5rem;
   font-size: 0.8rem;
   overflow: hidden;
-  filter: drop-shadow(0 0 .3rem rgb(0, 0, 0));
-
+  filter: drop-shadow(0 0 0.3rem rgb(0, 0, 0));
 }
 
 .movie_list.favorite_btn {
@@ -52,8 +52,7 @@
   font-weight: 800;
   padding: 0;
   margin-bottom: 0.4rem;
-  filter: drop-shadow(0 0 .3rem rgb(0, 0, 0));
-
+  filter: drop-shadow(0 0 0.3rem rgb(0, 0, 0));
 }
 .movie_list.favorite_btn .icon {
   font-size: 1.6rem;
@@ -65,6 +64,8 @@
   display: flex;
   margin-top: 2rem;
   margin-bottom: 2rem;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 .movie_list_filter li {
   cursor: pointer;
@@ -75,6 +76,7 @@
   padding: 0.5rem 1rem;
   border-radius: 5px;
   padding-bottom: 0.3rem;
+  margin-top: 1rem;
 }
 .category_search {
   color: white;

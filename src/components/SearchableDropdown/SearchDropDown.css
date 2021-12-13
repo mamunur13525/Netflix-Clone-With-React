@@ -89,3 +89,14 @@ ul li.movie_search_list:last-child {
   border-bottom: 2px solid rgb(0, 110, 255);
   display: inline-block;
 }
+
+@media (max-width: 1080px) {
+  .search_with_dropdown {
+    display: none;
+  }
+}
+@media (max-width: 991px) {
+  .search_with_dropdown {
+    display: block;
+  }
+}

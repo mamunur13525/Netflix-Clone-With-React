@@ -130,9 +130,18 @@ nav {
   overflow: hidden;
   text-overflow: ellipsis;
   color: white;
-
 }
 .dropdown {
   margin-left: 0.3rem;
   cursor: pointer;
+}
+.margin-left-auto {
+  margin-left: auto;
+}
+
+@media (max-width: 1080px) {
+  .flex-direction-coloumn {
+    flex-direction: column-reverse;
+    padding-bottom: 1rem;
+  }
 }
