@@ -24,13 +24,12 @@
   .footer_section {
     width: 95%;
   }
-  .footer_ul{
-      width: 50%;
+  .footer_ul {
+    width: 50%;
   }
 }
 @media (max-width: 970px) {
- 
-  .footer_ul{
-      width: 100%;
+  .footer_ul {
+    width: 100%;
   }
 }

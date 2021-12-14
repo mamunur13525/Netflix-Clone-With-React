@@ -4,7 +4,6 @@
   cursor: pointer;
   transition: all ease-in 0.2s;
   position: relative;
-
 }
 .list_movie_img {
   color: white;
@@ -17,7 +16,8 @@
   margin-right: 1rem;
 }
 .movie_list_div:hover {
-  transform: scale(1.1);
+  -webkit-transform: scale(1.1);
+          transform: scale(1.1);
   z-index: 14;
 }
 .movie_list_div:hover .movie_title_des {
@@ -36,14 +36,16 @@
 }
 .movie_title_des h5 {
   font-weight: 800;
-  filter: drop-shadow(0 0 0.3rem rgb(0, 0, 0));
+  -webkit-filter: drop-shadow(0 0 0.3rem rgb(0, 0, 0));
+          filter: drop-shadow(0 0 0.3rem rgb(0, 0, 0));
 }
 .movie_title_des p {
   line-height: 1.1;
   height: 2.5rem;
   font-size: 0.8rem;
   overflow: hidden;
-  filter: drop-shadow(0 0 0.3rem rgb(0, 0, 0));
+  -webkit-filter: drop-shadow(0 0 0.3rem rgb(0, 0, 0));
+          filter: drop-shadow(0 0 0.3rem rgb(0, 0, 0));
 }
 
 .movie_list.favorite_btn {
@@ -52,7 +54,8 @@
   font-weight: 800;
   padding: 0;
   margin-bottom: 0.4rem;
-  filter: drop-shadow(0 0 0.3rem rgb(0, 0, 0));
+  -webkit-filter: drop-shadow(0 0 0.3rem rgb(0, 0, 0));
+          filter: drop-shadow(0 0 0.3rem rgb(0, 0, 0));
 }
 .movie_list.favorite_btn .icon {
   font-size: 1.6rem;
@@ -87,4 +90,10 @@
 }
 .movie_list_filter li.activeCategory {
   background: #b20000 !important;
+}
+
+@media (max-width: 550px) {
+  .movie_list_div {
+    width: 180px;
+  }
 }

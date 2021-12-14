@@ -3,7 +3,6 @@ import { Route, Routes } from 'react-router';
 import LandingPage from '../pages/LandingPage/LandingPage';
 import PrivateRoute from '../pages/PrivateRoute/PrivateRoute';
 import Login from '../pages/Login/Login';
-import Other from '../pages/Other/Other';
 import Movies from '../pages/Movies/Movies';
 import Favorites from '../pages/Favorites/Favorites';
 import SpecificMovie from '../pages/SpecificMovie/SpecificMovie';
@@ -23,14 +22,16 @@ const RoutePage = () => {
                         <Favorites />
                     </PrivateRoute>
                 }
-            />       <Route
+            />
+            <Route
                 path="/movies"
                 element={
                     <PrivateRoute>
                         <Movies />
                     </PrivateRoute>
                 }
-            />     <Route
+            />
+            <Route
                 path="/movies/:id"
                 element={
                     <PrivateRoute>
@@ -38,14 +39,7 @@ const RoutePage = () => {
                     </PrivateRoute>
                 }
             />
-            <Route
-                path="/other"
-                element={
-                    <PrivateRoute>
-                        <Other />
-                    </PrivateRoute>
-                }
-            />
+
         </Routes>
     );
 };

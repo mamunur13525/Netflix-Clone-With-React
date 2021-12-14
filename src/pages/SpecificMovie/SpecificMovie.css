@@ -10,7 +10,8 @@
   position: absolute;
   left: 50%;
   top: 50%;
-  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
   height: 82%;
   padding-top: 1.5rem;
 }
@@ -24,7 +25,8 @@
   height: 100vh;
   top: 0;
   z-index: 0;
-  filter: blur(1.3px) brightness(60%);
+  -webkit-filter: blur(1.3px) brightness(60%);
+          filter: blur(1.3px) brightness(60%);
 }
 .content_side {
   padding: 1rem 2rem;
@@ -98,7 +100,8 @@
     align-items: center;
     height: auto;
     position: static;
-    transform: translate(0, 0);
+    -webkit-transform: translate(0, 0);
+            transform: translate(0, 0);
   }
   .movie_content .specific_poster_image {
     width: 350px;

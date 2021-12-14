@@ -80,7 +80,7 @@ const SearchDropDown = ({ searchType, setSearchType }) => {
                         {
                             filterData.length === 0 && <p className='text-center text-white my-5 w-100'>No Movie Found..!</p>
                         }
-                        <li onClick={() => {   setIsMenuOpen(false);navigate('/search-movie'); setSearchType('') }} className='more_results'>More results</li>
+                        <li onClick={() => { setIsMenuOpen(false); navigate('/search-movie'); setSearchType('') }} className='more_results'>More results</li>
                     </ul>
                 </div>
             }

@@ -30,21 +30,21 @@ const FqQuestion = () => {
             <div className='fq_div'>
                 <h1 className='title text-center mb-5'>Frequently Asked Questions</h1>
                 <Accordion className='fq_accourdion'>
-                {
-                    question.map((item, ind) => (
-                        <FqQuestionAccordion
-                            key={ind}
-                            title={item.title}
-                            des={item.des}
-                            index={ind}
-                        />
-                    ))
-                }
+                    {
+                        question.map((item, ind) => (
+                            <FqQuestionAccordion
+                                key={ind}
+                                title={item.title}
+                                des={item.des}
+                                index={ind}
+                            />
+                        ))
+                    }
                 </Accordion>
             </div>
             <div className='m-auto py-5 mb-2'>
-                    <Subcripiton />
-                </div>
+                <Subcripiton />
+            </div>
         </section>
     );
 };

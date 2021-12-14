@@ -125,7 +125,7 @@ const TrailerVideo = ({ watchVideo, setWatchVideo }) => {
                     <span>
                         Play Trailer
                     </span>
-                    <IoClose style={{fontSize:'2rem'}} className='cursor-pointer ' onClick={() => setWatchVideo({ status: false, key: '' })} />
+                    <IoClose style={{ fontSize: '2rem' }} className='cursor-pointer ' onClick={() => setWatchVideo({ status: false, key: '' })} />
                 </p>
                 {
                     watchVideo.status &&

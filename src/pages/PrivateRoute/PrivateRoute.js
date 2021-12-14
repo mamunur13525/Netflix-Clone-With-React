@@ -3,7 +3,6 @@ import React from 'react';
 import { useLocation, Navigate } from 'react-router';
 import { useAuth } from '../../contexts/AuthContext';
 
-
 function PrivateRoute({ children }) {
     const { currentUsers } = useAuth();
     const location = useLocation();

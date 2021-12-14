@@ -5,14 +5,12 @@ import { AiOutlinePlus } from 'react-icons/all';
 
 const FqQuestionAccordion = ({ title, des, index }) => {
     const [open, setOpen] = useState({ status: false, ind: null })
-
-
     const clickItem = () => {
         setOpen({ status: !open.status, ind: index })
     }
 
     return (
-        <Accordion.Item  eventKey={index}>
+        <Accordion.Item eventKey={index}>
             <Accordion.Header onClick={clickItem}>
                 {
                     <div className="flex">

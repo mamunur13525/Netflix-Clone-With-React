@@ -88,7 +88,7 @@ const Footer = () => {
                     }
                 </div>
                 <p className='mt-4'>
-                Netflix Bangladesh
+                    Netflix Bangladesh
                 </p>
             </div>
         </footer>

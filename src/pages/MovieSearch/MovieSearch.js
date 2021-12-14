@@ -3,7 +3,6 @@ import { MovileList, SearchValue } from '../../App';
 import Movie from '../../components/MovieList/Movie';
 import './MovieSearch.css';
 
-
 const MovieSearch = () => {
     const [allMovie] = useContext(MovileList);
     const [searchInputChange] = useContext(SearchValue)
@@ -26,7 +25,6 @@ const MovieSearch = () => {
                 {
                     filterData.length === 0 && <h3 className='text-white text-center my-5'>No Movie Found..!</h3>
                 }
-
             </div>
         </section>
     );

@@ -2,8 +2,8 @@ input#email {
   border-right: 2px solid gray;
 }
 @media (max-width: 710px) {
-    .form_subcription{
-        width: 90%;
-        margin:auto;
-    }
+  .form_subcription {
+    width: 90%;
+    margin: auto;
+  }
 }

@@ -83,15 +83,22 @@ nav {
   border: none;
   box-shadow: none;
 }
+.search_box input::-webkit-input-placeholder {
+  color: white;
+}
+.search_box input:-ms-input-placeholder {
+  color: white;
+}
+.search_box input::-ms-input-placeholder {
+  color: white;
+}
 .search_box input::placeholder {
   color: white;
 }
 .sign_up_button {
   margin-left: 1rem;
 }
-.logo-div div ul li.active a {
-  color: rgb(179, 179, 179);
-}
+
 .favoriteNav {
   position: relative;
 }
@@ -138,10 +145,43 @@ nav {
 .margin-left-auto {
   margin-left: auto;
 }
-
+.ul_movie_favorite {
+  display: flex;
+  margin-bottom: 0px;
+  list-style: none;
+  width: 100%;
+  align-items: center;
+  flex-wrap: wrap;
+  padding-left: 0px;
+}
+.ul_movie_favorite li a {
+  color: white;
+  text-decoration: none;
+  margin-left: 1rem;
+  font-weight: 600;
+}
+.ul_movie_favorite li a:hover {
+  color: rgb(201, 201, 201);
+}
+.ul_movie_favorite li.active a {
+  color: rgb(179, 179, 179);
+}
+.searchbar {
+  margin-left: auto;
+  align-items: center;
+}
 @media (max-width: 1080px) {
   .flex-direction-coloumn {
     flex-direction: column-reverse;
     padding-bottom: 1rem;
+  }
+}
+@media (max-width: 991px) {
+  .ul_movie_favorite {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .ul_movie_favorite li {
+    padding: 0.3rem 0rem;
   }
 }
